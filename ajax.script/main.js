@@ -12,38 +12,28 @@ function getData(url, cb) {
 
     };
 
-
-
     xhr.open("GET", url);
     xhr.send();
 
 }
 
 
-
 function getTableHeaders(obj) {
     var tableHeaders = [];
 
-
-
     Object.keys(obj).forEach(function(key) {
-
         tableHeaders.push(`<td>${key}</td>`);
 
     });
-
-
 
     return `<tr>${tableHeaders}</tr>`;
 
 }
 
 
-
 function generatePaginationButtons(next, prev) {
 
     if (next && prev) {
-
         return `<button onclick="writeToDocument('${prev}')">Previous</button>
                 <button onclick="writeToDocument('${next}')">Next</button>`;
     } else if (next && !prev) {
@@ -52,7 +42,6 @@ function generatePaginationButtons(next, prev) {
         return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
 
     }
-
 }
 
 
@@ -88,7 +77,7 @@ function writeToDocument(url) {
 
         });
 
-        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`;
+        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`.replace(/,/g, "");
 
     });
 
