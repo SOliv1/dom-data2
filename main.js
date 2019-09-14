@@ -1,12 +1,8 @@
-
 const baseURL = "https://swapi.co/api/";
-
 
 function getData(type, cb) {
 
     var xhr = new XMLHttpRequest();
-
-
 
     xhr.onreadystatechange = function() {
 
@@ -16,29 +12,22 @@ function getData(type, cb) {
 
         }
 
-
-
     };
 
     xhr.open("GET", baseURL + type + "/");
 
     xhr.send();
 
-
-
 }
 
-
 function getTableHeaders(obj) {
-
-
     var tableHeaders = [];
+
+
 
     Object.keys(obj).forEach(function(key) {
 
         tableHeaders.push(`<td>${key}</td>`)
-
-
 
     });
 
@@ -46,39 +35,28 @@ function getTableHeaders(obj) {
 
     return `<tr>${tableHeaders}</tr>`;
 
-
-
 }
 
 
-
 function writeToDocument(type) {
-
     var el = document.getElementById("data");
-
-
-
     el.innerHTML = "";
 
-
-
-
-
-
-
     getData(type, function(data) {
-
+        var tableRows = [];
         data = data.results;
-
         var tableHeaders = getTableHeaders(data[0]);
 
-
-
         data.forEach(function(item) {
+            var dataRow = [];
 
-            // el.innerHTML += "<p>" + item.name + "</p>";
+            Object.keys(item).forEach(function(key) {
+                dataRow.push(`<td>${item[key]}</td>`);
+                console.log(key);
 
+            });
 
+            tableRows.push(dataRow)
 
         });
 
@@ -87,6 +65,3 @@ function writeToDocument(type) {
     });
 
 }
-
-
-
